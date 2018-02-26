@@ -1,0 +1,123 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.oss.licenses.plugin'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+    dataBinding {
+        enabled true
+    }
+    dexOptions {
+        maxProcessCount 4
+        preDexLibraries false
+        javaMaxHeapSize "4g"
+    }
+    aaptOptions {
+        cruncherEnabled false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        applicationId "com.snehpandya.androidtemplate"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SOCIAL_LOGIN_TOKEN", '"TOKEN"'
+
+        ndk {
+            moduleName 'xyz'
+            abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'mips', 'x86', 'x86-64'
+        }
+    }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'mips', 'x86', 'x86-64'
+            universalApk false
+        }
+    }
+    buildTypes {
+        release {
+            buildConfigField "String", "API_URL", '"http://api.xyz.com/"'
+            buildConfigField "boolean", "REPORT_CRASHES", "false"
+
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "API_URL", '"http://api.xyz.com/"'
+            buildConfigField "boolean", "REPORT_CRASHES", "true"
+
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'apt_generated']
+            assets.srcDirs = ['src/main/assets']
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/activity',
+                            'src/main/res/layout/fragment',
+                            'src/main/res/layout/item',
+                            'src/main/res'
+                    ]
+        }
+    }
+    configurations.all {
+
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Android Support Libraries
+    implementation 'com.android.support:appcompat-v7:' + versions.appCompat
+    implementation 'com.android.support:design:' + versions.appCompat
+    implementation 'com.android.support:recyclerview-v7:' + versions.appCompat
+    implementation 'com.android.support:cardview-v7:' + versions.appCompat
+    implementation 'com.android.support.constraint:constraint-layout:' + versions.constraintLayout
+
+    //Android Architecture Components
+    //ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:' + versions.architectureComponents
+    implementation 'android.arch.lifecycle:common-java8:' + versions.architectureComponents
+    //Room
+    implementation 'android.arch.persistence.room:rxjava2:' + versions.room
+    //Paging
+    implementation 'android.arch.paging:runtime:' + versions.paging
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:' + versions.retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:' + versions.retrofit
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + versions.retrofit
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:' + versions.rxJava2
+    implementation 'io.reactivex.rxjava2:rxandroid:' + versions.rxAndroid2
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:' + versions.glide
+
+    //Open Source Licenses and Permissions
+    implementation 'pub.devrel:easypermissions:' + versions.easyPermissions
+    implementation 'com.google.android.gms:play-services-oss-licenses:' + versions.openSourceLicenses
+
+    //Android Support Testing Libraries
+    testImplementation 'junit:junit:' + versions.jUnit
+    androidTestImplementation 'com.android.support.test:runner:' + versions.testRunner
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:' + versions.espresso
+}
+
+apply plugin: 'com.google.gms.google-services'
