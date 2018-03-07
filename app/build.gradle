@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 android {
@@ -86,8 +86,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Kotlin
-    implementation deps.kotlinplugin.stdlib
-    implementation deps.kotlinplugin.ktx
+//    implementation deps.kotlinplugin.stdlib
+//    implementation deps.kotlinplugin.ktx
 
     //Android Support Libraries
     implementation deps.support.appcompat
@@ -97,7 +97,7 @@ dependencies {
 
     //Android Layouts
     implementation deps.constraintlayout.core
-    kapt deps.support.databinding
+    annotationProcessor deps.support.databinding
 
     //Google Play Services
     implementation deps.googleplayservices.opensourcelicenses
@@ -109,7 +109,7 @@ dependencies {
     implementation deps.lifecycle.java8
     //Room
     implementation deps.room.runtime
-    kapt deps.room.compiler
+    annotationProcessor deps.room.compiler
     testImplementation deps.room.testing
     //LiveData
     implementation deps.livedata.reactivestreams
@@ -120,8 +120,8 @@ dependencies {
     // Retrofit and OkHttp
     implementation deps.retrofit2.runtime
     implementation deps.retrofit2.gson
-    implementation deps.okhttp3.core
-    implementation deps.okhttp3.logginginterceptor
+//    implementation deps.okhttp3.core
+//    implementation deps.okhttp3.logginginterceptor
 
     // RxJava2
     implementation deps.rxjava2.core
@@ -129,11 +129,11 @@ dependencies {
     implementation deps.rxjava2.kotlin
 
     // Dagger
-    implementation deps.dagger2.runtime
-    kapt deps.dagger2.compiler
-    implementation deps.dagger2.android
-    implementation deps.dagger2.androidsupport
-    kapt deps.dagger2.androidsupportcompiler
+//    implementation deps.dagger2.runtime
+//    kapt deps.dagger2.compiler
+//    implementation deps.dagger2.android
+//    implementation deps.dagger2.androidsupport
+//    kapt deps.dagger2.androidsupportcompiler
 
     //Glide
     implementation deps.glide.core
