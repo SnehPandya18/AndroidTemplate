@@ -17,6 +17,20 @@ buildscript {
 
 allprojects {
     addRepos(repositories)
+
+    task checkstyle(type: Checkstyle) {
+        showViolations = true
+        configFile file("../settings/checkstyle.xml")
+
+        source 'src/main/java'
+        include '**/*.java'
+        exclude '**/gen/**'
+        exclude '**/R.java'
+        exclude '**/BuildConfig.java'
+
+        // empty classpath
+        classpath = files()
+    }
 }
 
 
