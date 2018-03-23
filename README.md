@@ -45,7 +45,7 @@ Contributing
 ---
 You are most welcome to contribute to this project!
 
-Please have a look at pull request template provided below, before contributing and proposing a change.
+Please have a look at [Contributing Guidelines](https://github.com/SnehPandya18/AndroidTemplate/blob/master/CONTRIBUTING.md), before contributing and proposing a change.
 
 ### Pull Request
 To generate a pull request, please consider following [Pull Request Template](https://github.com/SnehPandya18/AndroidTemplate/blob/master/PULL_REQUEST_TEMPLATE.md).
